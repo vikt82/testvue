@@ -3,9 +3,9 @@ import Router from 'vue-router'
 // import Home from './views/Home.vue'
 
 // Page
-import Main from './components/AppMain'
-import AboutUs from './components/AppAboutUs'
-import ContactUs from './components/AppContactUs'
+import Main from './views/AppMain'
+import AboutUs from './views/AppAboutUs'
+import ContactUs from './views/AppContactUs'
 
 Vue.use(Router)
 

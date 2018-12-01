@@ -16,7 +16,10 @@
         <v-toolbar app dark fixed class="primary" v-model="drawer">
             <v-toolbar-side-icon @click.stop="drawer = !drawer" class="hidden-md-and-up"></v-toolbar-side-icon>
             
-            <v-toolbar-title>{{logo}}</v-toolbar-title>
+            <router-link to="/" tag="span" class="link">
+                <v-toolbar-title>{{logo}}</v-toolbar-title>
+            </router-link>
+
             <v-spacer></v-spacer>
             <v-toolbar-items class="hidden-sm-and-down">
                 <v-btn v-for="(item, i) in menuItems" :key="`menuItems${i}`" flat :to="item.route">
@@ -64,5 +67,8 @@ export default {
 <style>
 .material-icons {
     margin-right: 1rem;
+}
+.link {
+    cursor: pointer;
 }
 </style>
