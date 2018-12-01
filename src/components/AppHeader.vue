@@ -1,23 +1,41 @@
 <template>
-    <v-toolbar app dark fixed class="primary">
-        <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
-        <v-toolbar-title>{{logo}}</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-toolbar-items class="hidden-sm-and-down">
-            <v-btn v-for="item in menuItems" :key="item.id" flat>
-                <i class="material-icons">{{item.icon}}</i>
-                {{item.title}}
-            </v-btn>
-        </v-toolbar-items>
-    </v-toolbar>
+    <div>
+        <v-navigation-drawer absolute temporary v-model="drawer" class="hidden-md-and-up">
+            <v-list>
+                <v-list-tile v-for="(item,i) in menuItems" :key="`navdrawer${i}`">
+                    <v-list-tile-action>
+                        <v-icon v-html="item.icon"></v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                        <v-list-tile-title v-text="item.title" :to="item.route"></v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+            </v-list>
+        </v-navigation-drawer>
+
+        <v-toolbar app dark fixed class="primary" v-model="drawer">
+            <v-toolbar-side-icon @click.stop="drawer = !drawer" class="hidden-md-and-up"></v-toolbar-side-icon>
+            
+            <v-toolbar-title>{{logo}}</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-toolbar-items class="hidden-sm-and-down">
+                <v-btn v-for="(item, i) in menuItems" :key="`menuItems${i}`" flat :to="item.route">
+                    <v-icon v-html="item.icon"></v-icon>
+                    {{item.title}}
+                </v-btn>
+            </v-toolbar-items>
+        </v-toolbar>
+    </div>
 </template>
 
 <script>
 export default {
-
-    data: () => ({
-        "logo": "Logo Type !!!"
-    }),
+    data() {
+        return {
+            "logo": "Logo Type",
+            drawer: false
+        };
+    },
 
     computed: {
         menuItems() {
@@ -25,7 +43,7 @@ export default {
                 {
                     icon: "android",
                     title: "Home",
-                    route: "/home"
+                    route: "/"
                 },
                 {
                     icon: "book",
@@ -37,15 +55,14 @@ export default {
                     title: "Contact Us",
                     route: "/contact-us"
                 }
-            ]
+            ];
         }
-    }
-
 }
+};
 </script>
 
 <style>
-    .material-icons {
-        margin-right: 1rem;
-    }
+.material-icons {
+    margin-right: 1rem;
+}
 </style>
